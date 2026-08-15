@@ -57,6 +57,38 @@
              */
 
             #endregion
+
+            #region Question03
+
+            /*
+             a) What is a static field, and how is it different from an instance field?
+
+            ans => A static field exists for the entire duration of the program; 
+            any modification to it affects all instances because it is shared among them.
+            In contrast, an instance field exists only at the object level for the lifetime of that specific object,
+            and modifications to it do not affect other objects.
+
+            b) What is a static method? Can a static method directly access instance members?
+
+            ans => It is a method that is called directly using the class name, 
+            without needing an object; it resides in memory for the entire duration of the program's execution, 
+            and It cannot directly access instance members.
+
+            c) What is a static constructor, and when is it executed?
+
+            ans => It is executed automatically before accessing any static member 
+            or creating the first instance of the class
+
+            d) What is a static class? Can you create an object from a static class?
+
+            ans => A static class is a class where all its members must be static;
+            they are called directly using the class name, and you cannot create an object from it.
+
+             */
+
+
+
+            #endregion
         }
     }
 }
