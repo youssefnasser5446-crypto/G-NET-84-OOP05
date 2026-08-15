@@ -89,6 +89,31 @@
 
 
             #endregion
+
+            #region Question04
+
+            /*
+              a) What is an Extension Method?
+
+            ans => It is a method extension that allows me to add a method 
+            without modifying the original class—even if I don't have access to that class.
+
+            b) What keyword must be used in the first parameter of an extension method?
+
+            ans => The this keyword is followed by the type—such as a class name,
+            a reference type, or a data type—and the corresponding variable, like this int x or this Person obj.
+
+            c) Where must an extension method be declared?
+
+            An extension method must be declared as a static method inside a static class.
+
+            d) Can an extension method access private members of the class it extends?
+
+            ans => No, an extension method cannot directly access private or protected members of the class it extends
+
+             */
+
+            #endregion
         }
     }
 }
