@@ -1,4 +1,6 @@
-﻿namespace AssignmentSession05OOP
+﻿using AssignmentSession05OOP.inheritance;
+
+namespace AssignmentSession05OOP
 {
     internal class Program
     {
@@ -141,6 +143,149 @@
              */
 
             #endregion
+           
+
+            Console.WriteLine(" ==========================================");
+            Console.WriteLine(" Smart Delivery Management System");
+            Console.WriteLine(" ==========================================");
+            DeliveryAddress address = new DeliveryAddress("Cairo", "street1",5);
+            Shipment standard = new StandardShipment("SH001", "Laptop", 3, 80, address);
+            Shipment express = new ExpressShipment("SH002", "Mobile Phone", 2, 60, 30, address);
+            Shipment international = new InternationalShipment("SH003", "Televition", 8, 120, "Germany", 100, address);
+
+            Console.WriteLine("==========================================\n");
+            Console.WriteLine("Creating Shipments...");
+            Console.WriteLine("==========================================\n");
+            Console.WriteLine("Standard Shipment is Created");
+            Console.WriteLine("Express Shipment is Created");
+            Console.WriteLine("International Shipment is Created");
+
+            Console.WriteLine($"Total Shipments Created : {Shipment.TotalShipmentsCreated}");
+           
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Object Copying");
+            Console.WriteLine("==========================================");
+
+            Shipment shipmdent1 = standard.CopyShipment();
+            Shipment shipmdent2 = shipmdent1;
+
+            Console.WriteLine($"Original Shipment  : {shipmdent1.TrackingCode} ");
+            Console.WriteLine($"Assigned  Shipment  : {shipmdent2.TrackingCode} ");
+
+            Console.WriteLine($"Same Object : {ReferenceEquals(shipmdent1, shipmdent2)}");
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Shallow Copy");
+            Console.WriteLine("==========================================");
+
+            Shipment shallowCopy = standard.CopyShipment();
+            Console.WriteLine($"Original Shipment Address : {standard.Destination.city}");
+            Console.WriteLine($"Copied  Shipment Address : {shallowCopy.Destination.city}\n");
+            shallowCopy.Destination.city = "Giza";
+            Console.WriteLine($"Changing copied shipment address...\n");
+            Console.WriteLine($"Original Shipment Address : {standard.Destination.city}");
+            Console.WriteLine($"Copied  Shipment Address : {shallowCopy.Destination.city}\n");
+            Console.WriteLine($"Same DeliveryAddress Object : {ReferenceEquals(standard.Destination, shallowCopy.Destination)}");
+           
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Deep Copy");
+            Console.WriteLine("==========================================");
+            Shipment DeepCopy = standard.DeepCopy();
+            Console.WriteLine($"Original Shipment Address : {standard.Destination.city}");
+            Console.WriteLine($"Copied  Shipment Address : {DeepCopy.Destination.city}\n");
+            Console.WriteLine("Changing copied shipment address...\n");
+            DeepCopy.Destination.city = "Cairo";
+            Console.WriteLine($"Original Shipment Address : {standard.Destination.city}");
+            Console.WriteLine($"Copied  Shipment Address : {DeepCopy.Destination.city}\n");
+            Console.WriteLine($"Same DeliveryAddress Object : {ReferenceEquals(standard.Destination, DeepCopy.Destination)}");
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Extension Methods");
+            Console.WriteLine("==========================================");
+
+            Console.WriteLine( standard.GetSummary());
+            Console.WriteLine(express.GetSummary());
+            Console.WriteLine(international.GetSummary());
+
+            Console.WriteLine($"SH001 Is Delivered : {standard.IsDelivered()}");
+            Console.WriteLine($"SH003 Is Delivered : {international.IsDelivered()}");
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Tracking Status");
+            Console.WriteLine("==========================================");
+
+            international.UpdateTrackingStatus("Out For Delivery");
+            Console.WriteLine("After update ====== \n");
+            Console.WriteLine(standard.GetSummary());
+            Console.WriteLine(express.GetSummary());
+            Console.WriteLine(international.GetSummary());
+
+            DeliveryUtilities.PrintSeparator();
+            DeliveryUtilities.PrintSystemTitle();
+            DeliveryUtilities.PrintSeparator();
+
+
+            DeliveryCenter DC = new DeliveryCenter();
+            Console.WriteLine(DC.AddShipment(standard) ? "Shipment Added Succssfully" : "Shipment Not Added");
+            Console.WriteLine(DC.AddShipment(express) ? "Shipment Added Succssfully" : "Shipment Not Added");
+            Console.WriteLine(DC.AddShipment(international) ? "Shipment Added Succssfully" : "Shipment Not Added");
+
+            Console.WriteLine("\n=======================================\n");
+
+            Console.WriteLine("Standard Shipment\n");
+            DeliveryHelper.PrintShipmentDetails(standard);
+            Console.WriteLine("\n=======================================\n");
+
+            Console.WriteLine("Express Shipment\n");
+            DeliveryHelper.PrintShipmentDetails(express);
+            Console.WriteLine("\n=======================================\n");
+
+            Console.WriteLine("International Shipment\n");
+            DeliveryHelper.PrintShipmentDetails(international);
+            Console.WriteLine("\n=======================================\n");
+
+            //Console.WriteLine("Tracking Status with interface array");
+
+            //ITrackable[] Track = { standard, Express, international };
+
+            //foreach (ITrackable x in Track)
+            //{
+            //    Console.WriteLine(x.GetTrackingStatus());
+            //}
+
+            //IInsurable[] Insurable = { standard, Express, international };
+            //Console.WriteLine("\n=======================================\n");
+
+            //foreach (IInsurable x in Insurable)
+            //{
+            //    if (x is StandardShipment)
+            //        Console.WriteLine($"Standard Shipment Insurance : {x.CalculateInsurance()} EGP");
+
+            //    if (x is ExpressShipment)
+            //        Console.WriteLine($"Express Shipment Insurance : {x.CalculateInsurance()} EGP");
+
+            //    if (x is InternationalShipment)
+            //        Console.WriteLine($"International Shipment Insurance : {x.CalculateInsurance()} EGP");
+            //}
+            //Console.WriteLine("\n=======================================\n");
+            //Console.WriteLine("\nTracking Status with DeliveryReport \n");
+
+            //DeliveryReport report = new DeliveryReport();
+            //report.PrintShipment(standard);
+            //report.PrintShipment(Express);
+            //report.PrintShipment(international);
+            //Console.WriteLine("\n=======================================\n");
+
+            //Console.WriteLine("\nPrint Insurance Status with DeliveryReport \n");
+            //Console.Write("Standard Shipment Insurance : "); report.PrintInsurance(standard); Console.Write(" EGP\n");
+            //Console.Write("Express Shipment Insurance : "); report.PrintInsurance(Express); Console.Write(" EGP\n");
+            //Console.Write("International Shipment Insurance : "); report.PrintInsurance(international); Console.Write(" EGP\n");
+
+
+            //Console.WriteLine("\n=======================================\n");
+            //Console.WriteLine("Interface Polymorphism Demonstrated Successfully.");
+
+
         }
     }
 }
